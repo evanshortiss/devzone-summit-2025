@@ -54,27 +54,27 @@ upstream:
           connection:
             password: '${POSTGRESQL_ADMIN_PASSWORD}'
             user: postgres
-      integrations:
-        github:
-          - apps:
-            - appId: '${AUTH_GITHUB_APP_ID}'
-              clientId: '${AUTH_GITHUB_CLIENT_ID}'
-              clientSecret: '${AUTH_GITHUB_CLIENT_SECRET}'
-              privateKey: |
-                ${GITHUB_PRIVATE_KEY}
-              webhookSecret: none
-          host: github.com
-      catalog:
-        providers:
-          githubOrg:
-            githubUrl: 'https://github.com'
-            id: production
-            orgs:
-              - '${GITHUB_ORGANIZATION}'
-            schedule:
-              frequency:
-                minutes: 30
-              initialDelay:
-                seconds: 15
-              timeout:
-                minutes: 15
+      # integrations:
+      #   github:
+      #     - apps:
+      #       - appId: '${AUTH_GITHUB_APP_ID}'
+      #         clientId: '${AUTH_GITHUB_CLIENT_ID}'
+      #         clientSecret: '${AUTH_GITHUB_CLIENT_SECRET}'
+      #         privateKey: |
+      #           ${GITHUB_PRIVATE_KEY}
+      #         webhookSecret: none
+      #     host: github.com
+      # catalog:
+      #   providers:
+      #     githubOrg:
+      #       githubUrl: 'https://github.com'
+      #       id: production
+      #       orgs:
+      #         - '${GITHUB_ORGANIZATION}'
+      #       schedule:
+      #         frequency:
+      #           minutes: 30
+      #         initialDelay:
+      #           seconds: 15
+      #         timeout:
+      #           minutes: 15
