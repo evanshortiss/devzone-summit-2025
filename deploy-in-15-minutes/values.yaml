@@ -65,6 +65,9 @@ upstream:
       #         webhookSecret: none
       #     host: github.com
       # catalog:
+      #   locations:
+      #     rules:
+      #     - allow: [Component, API, Location, Template, System, Domain, Resource, Group, User]
       #   providers:
       #     github:
       #       providerId:
