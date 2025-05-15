@@ -66,6 +66,14 @@ upstream:
       #     host: github.com
       # catalog:
       #   providers:
+      #     github:
+      #       providerId:
+      #         catalogPath: /catalog-info.yaml
+      #         organization: ${GITHUB_ORGANIZATION}
+      #         schedule:
+      #           frequency: { minutes: 5 }
+      #           initialDelay: { seconds: 15 }
+      #           timeout: { minutes: 3 }
       #     githubOrg:
       #       githubUrl: 'https://github.com'
       #       id: production
