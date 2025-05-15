@@ -67,6 +67,9 @@ upstream:
       # catalog:
       #   rules:
       #   - allow: [Component, API, Location, Template, System, Domain, Resource, Group, User]
+      #   locations:
+      #   - type: url
+      #     target: https://github.com/rhdh-demo-gh/ob-demo/blob/rbac/locations.yaml
       #   providers:
       #     github:
       #       providerId:
