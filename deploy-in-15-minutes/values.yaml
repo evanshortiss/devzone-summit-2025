@@ -64,12 +64,12 @@ upstream:
       #           ${GITHUB_PRIVATE_KEY}
       #         webhookSecret: none
       #     host: github.com
-      # catalog:
-      #   rules:
-      #   - allow: [Component, API, Location, Template, System, Domain, Resource, Group, User]
-      #   locations:
-      #   - type: url
-      #     target: https://github.com/rhdh-demo-gh/ob-demo/blob/rbac/locations.yaml
+      catalog:
+        rules:
+        - allow: [Component, API, Location, Template, System, Domain, Resource, Group, User]
+        locations:
+        - type: url
+          target: https://github.com/rhdh-demo-gh/ob-demo/blob/rbac/locations.yaml
       #   providers:
       #     github:
       #       providerId:
