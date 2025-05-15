@@ -9,6 +9,8 @@ This demo demonstrates how Red Hat Developer Hub's Helm Chart simplifies deploym
 1. Select the **Add** menu from the Developer Perspective and search for the Helm Chart.
 1. When deploying the Helm Chart, replace the sample YAML with the _values.yaml_ in this directory.
 
-Wait for the deployment to complete, and try to login to the newly deployed instance of Red Hat Developer Hub.
+Ask an attendee for their GitHub handle while waiting for the deployment to complete. Add them to the *evans-developer-demos*
+GitHub Organisation. Login to the newly deployed instance of Red Hat Developer Hub, and show that the attendee identity is
+synced into the Software Catalog showing that they'll have access too.
 
 _NOTE: Make sure to add/update the callback URL for your the GitHub Application being used to authenticate_
