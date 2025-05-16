@@ -1,0 +1,113 @@
+global:
+  auth:
+    backend:
+      enabled: true
+  clusterRouterBase: REPLACE_ME
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/backstage-community-plugin-github-actions
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insights
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/backstage-community-plugin-github-issues
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
+      - disabled: false
+        package: >-
+          ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
+nameOverride: developer-hub
+route:
+  enabled: true
+  host: '{{ .Values.global.host }}'
+  path: /
+  tls:
+    enabled: true
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  wildcardPolicy: None
+upstream:
+  backstage:
+    # Load GitHub Secrets from the same namespace
+    extraEnvVarsSecrets:
+      - github-secrets
+    appConfig:
+      app:
+        baseUrl: 'https://{{- include "janus-idp.hostname" . }}'
+      # This enables the GitHub sign in and authentication provider
+      signInPage: github
+      auth:
+        environment: production
+        providers:
+          github:
+            production:
+              clientId: '${AUTH_GITHUB_CLIENT_ID}'
+              clientSecret: '${AUTH_GITHUB_CLIENT_SECRET}'
+      backend:
+        auth:
+          externalAccess:
+            - options:
+                secret: '${BACKEND_SECRET}'
+                subject: legacy-default-config
+              type: legacy
+        baseUrl: 'https://{{- include "janus-idp.hostname" . }}'
+        cors:
+          origin: 'https://{{- include "janus-idp.hostname" . }}'
+        database:
+          connection:
+            password: '${POSTGRESQL_ADMIN_PASSWORD}'
+            user: postgres
+      integrations:
+        github:
+          - apps:
+            - appId: '${AUTH_GITHUB_APP_ID}'
+              clientId: '${AUTH_GITHUB_CLIENT_ID}'
+              clientSecret: '${AUTH_GITHUB_CLIENT_SECRET}'
+              privateKey: |
+                ${GITHUB_PRIVATE_KEY}
+              webhookSecret: none
+            host: github.com
+      catalog:
+        rules:
+        - allow: [Component, API, Location, Template, System, Domain, Resource, Group, User]
+        locations:
+        - type: url
+          target: https://github.com/rhdh-demo-gh/ob-demo/blob/rbac/locations.yaml
+        - type: url
+          target: https://github.com/rhdh-demo-gh/templates/blob/main/location.yaml
+        providers:
+          github:
+            providerId:
+              catalogPath: /catalog-info.yaml
+              organization: ${GITHUB_ORGANIZATION}
+              schedule:
+                frequency: { minutes: 1 }
+                initialDelay: { seconds: 15 }
+                timeout: { minutes: 3 }
+          githubOrg:
+            githubUrl: 'https://github.com'
+            id: production
+            orgs:
+              - '${GITHUB_ORGANIZATION}'
+            schedule:
+              frequency:
+                minutes: 1
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 15
