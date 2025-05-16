@@ -89,7 +89,7 @@ upstream:
         - type: url
           target: https://github.com/rhdh-demo-gh/ob-demo/blob/rbac/locations.yaml
         - type: url
-          target: https://github.com/rhdh-demo-gh/templates/blob/main/location.yaml
+          target: https://github.com/evans-developer-demos/templates/blob/main/location.yaml
         providers:
           github:
             providerId:
