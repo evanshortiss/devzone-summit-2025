@@ -1,4 +1,4 @@
-# Deploy an internal developer portal in 15 minutes
+# Approvals please: Developer self-service with Backstage and GitOps
 
 This demo shows how to use Red Hat Developer Hub to bootstrap new applications,
 and request their deployment using a Git-based workflow.
